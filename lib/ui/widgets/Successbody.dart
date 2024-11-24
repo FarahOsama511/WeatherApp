@@ -4,7 +4,6 @@ import 'package:glass_kit/glass_kit.dart';
 import 'package:intl/intl.dart';
 import 'package:wheather/cubit/weathercubit.dart/weather_cubit.dart';
 import 'package:wheather/models/weathermodel.dart';
-import 'package:wheather/provider/providermodel.dart';
 
 class SuccessBody extends StatelessWidget {
   const SuccessBody(

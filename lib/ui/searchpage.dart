@@ -25,7 +25,7 @@ class _SearchpageState extends State<Searchpage> {
           onsubmitted: (value) {
             cityName = value;
             BlocProvider.of<WeatherCubit>(context).cityName = cityName!;
-            // await weatherdata.fetchWeather(cityName!);
+            BlocProvider.of<WeatherCubit>(context).getweather(cityName!);
 
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return WeatherPage();
@@ -36,7 +36,7 @@ class _SearchpageState extends State<Searchpage> {
             child: IconButton(
                 onPressed: () {
                   BlocProvider.of<WeatherCubit>(context).cityName = cityName!;
-                  // await weatherdata.fetchWeather(cityName!);
+                  BlocProvider.of<WeatherCubit>(context).getweather(cityName!);
 
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return WeatherPage();
