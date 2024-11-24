@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:wheather/models/api/apiservice.dart';
-import 'package:wheather/models/weathermodel.dart';
-import 'package:wheather/provider/providermodel.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wheather/cubit/weathercubit.dart/weather_cubit.dart';
 import 'package:wheather/ui/homescreen.dart';
 import 'package:wheather/ui/widgets/textfield.dart';
 
@@ -18,17 +16,16 @@ class _SearchpageState extends State<Searchpage> {
 
   @override
   Widget build(BuildContext context) {
-    final weatherdata = Provider.of<Providermodel>(context);
     return Scaffold(
       body: Center(
         child: Textfield(
           onchanged: (data) {
             cityName = data;
           },
-          onsubmitted: (value) async {
+          onsubmitted: (value) {
             cityName = value;
-            weatherdata.cityName = cityName;
-            await weatherdata.fetchWeather(cityName!);
+            BlocProvider.of<WeatherCubit>(context).cityName = cityName!;
+            // await weatherdata.fetchWeather(cityName!);
 
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return WeatherPage();
@@ -37,9 +34,9 @@ class _SearchpageState extends State<Searchpage> {
           suffixIcon: Padding(
             padding: const EdgeInsets.only(right: 8),
             child: IconButton(
-                onPressed: () async {
-                  weatherdata.cityName = cityName;
-                  await weatherdata.fetchWeather(cityName!);
+                onPressed: () {
+                  BlocProvider.of<WeatherCubit>(context).cityName = cityName!;
+                  // await weatherdata.fetchWeather(cityName!);
 
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return WeatherPage();

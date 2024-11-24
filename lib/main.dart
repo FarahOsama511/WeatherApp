@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:wheather/provider/providermodel.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wheather/cubit/weathercubit.dart/weather_cubit.dart';
+import 'package:wheather/models/api/apiservice.dart';
 import 'package:wheather/ui/searchpage.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(BlocProvider(
+    create: (context) => WeatherCubit(WeatherService()),
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -12,11 +16,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) {
-        return Providermodel();
-      },
-      child: MaterialApp(debugShowCheckedModeBanner: false, home: Searchpage()),
-    );
+    return MaterialApp(debugShowCheckedModeBanner: false, home: Searchpage());
   }
 }
